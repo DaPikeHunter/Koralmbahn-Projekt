@@ -1,0 +1,3 @@
+Kärnten Karte -> FERTIG
+Gemeinden zum auswählen(könnte Umrandungen hervorheben), GKZ zu Liste adden und Bezirk anzeigen  -> 
+Liste sollte dann im Hintergrund übertragen werden. ->

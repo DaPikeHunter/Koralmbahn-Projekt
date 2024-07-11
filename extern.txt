@@ -1,0 +1,63 @@
+    """Callback
+    JS code in Python der beim Ausführen des Programmes auf der Webseite übergeben wird
+    cb_data.index.indices"""
+    """callback = CustomJS(args=dict(source=source), code=
+        const indices = cb_data.source.selected.indices;
+        const data = source.data;
+        const selected_indices = data['selected_indices'];
+        const selected_indices = data['selected_gkz'];
+        
+        //Toggle selection state of clicked indices
+        for(let i =0; i<indices.length; i++){
+            const index = indices[i];
+            const selected_index = selected_indices.indexOf(index);
+            if(selected_index == -1){
+                selected_indices.push(index)
+                selected_gkz.push(data['gkz'][index]);
+            }else{
+                selected_indices.splice(selected_index, 1);
+                selected_gkz.splice(selected_index, 1);
+            }
+        }                
+        //Reset all colors and widths
+        for (let i = 0; i<data['x'].length, i++){
+            data['line_color'][i] = 'white';
+            data['line_width'][i] = 0.5;
+        }
+        //Apply selcetion colors and widths
+        for(let i = 0; i < selected_indices.length; i++){
+            const selected_index = selected_indices[i];
+            data['line_color'][selected_index] = 'yellow';
+            data['line_width'][selected index] = 2;
+        }
+        console.log('Ausgewählte GKZ:',selected_gkz);
+        source.change.emit();
+        )
+
+   #wenn bokeh server vorhanden
+        def tap_callback(attr, old, new):
+        indices = new['1d']['indices']
+        selected_indices = source.data['selected_indices']
+        data = source.data
+
+        #toggle select
+        for index in indices:
+            if index in selected_indices:
+                selected_indices.remove(index)
+            else:
+                selected_indices.append(index)
+        # reset all
+        for i in range(len(data['x'])):
+            data['line_color'][i] = 'white'
+            data['line_width'][i] = 0.5
+        # apply selection
+        for selected_index in selected_indices:
+            data['line_color'][selected_index] = 'yellow'
+            data['line_width'][selected_index] = 2
+        source.data['selected_indices'] = selected_indices
+        source.trigger('data', source.data, source.data)
+    source.selected.on_change('indices', tap_callback)
+    curdoc().add_root(column(p))
+    
+    #source.selected.on_change('indices', callback)
+    """
